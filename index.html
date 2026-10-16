@@ -3,145 +3,290 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Global Import Calc | Free Landed Cost, Duty & Profit Calculator</title>
-  <meta name="description" content="Calculate total landed cost, customs duties, import VAT/GST, freight fees, and profit margins globally. Free tool for ecommerce sellers and importers.">
-  <link rel="stylesheet" href="styles.css">
+  <title>Global Import Calc | Free Landed Cost & Customs Duty Calculator</title>
+  <meta name="description" content="Calculate international landed costs, customs duties, import VAT/GST, and net profit margins instantly.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="alternate" type="application/rss+xml" title="Global Import Calc Blog RSS Feed" href="/feed.xml" />
+  <!-- Netlify Identity Widget for Blog Portal Login -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>Global Import Calc</h1>
-      <p>Free Landed Cost, Customs Duty & Profit Calculator for Global Importers</p>
+
+  <!-- 1. Top Navigation Bar -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <span class="logo-icon">🌐</span> Global Import Calc
+      </a>
+
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </label>
+
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li><a href="/" class="nav-link active">Home</a></li>
+          <li><a href="#calculator" class="nav-link">Calculator</a></li>
+          <li><a href="#articles" class="nav-link">Articles</a></li>
+          <li><a href="#blog" class="nav-link">Blog</a></li>
+          <li><a href="#affiliate" class="nav-link highlight-btn">Affiliate Program</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <main class="container">
-    <div class="calculator-card">
-      <form id="calc-form">
-        <div class="form-group">
-          <label for="currency">Primary Currency</label>
-          <select id="currency">
-            <option value="$">USD ($)</option>
-            <option value="€">EUR (€)</option>
-            <option value="£">GBP (£)</option>
-            <option value="₹">INR (₹)</option>
-            <option value="A$">AUD (A$)</option>
-            <option value="C$">CAD (C$)</option>
-            <option value="¥">JPY (¥)</option>
-          </select>
-        </div>
+  <!-- 2. Hero Banner Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-badge">⚡ Global Import Cost & Margin Calculator</div>
+      <h1>Master Your Import Margins Before You Ship</h1>
+      <p class="hero-subheading">
+        Accurately estimate landed costs, customs duties, import taxes, and net profitability across major global trade routes in seconds.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#calculator" class="btn btn-primary">Start Calculating Free</a>
+        <a href="#affiliate" class="btn btn-secondary">Join Partner Program</a>
+      </div>
+    </div>
+  </section>
 
-        <h3>1. Product & Shipping Costs (Manual Entry)</h3>
-        <div class="grid">
-          <div class="form-group">
-            <label for="units">Total Quantity (Units)</label>
-            <input type="number" id="units" value="100" min="1" required>
-          </div>
-          <div class="form-group">
-            <label for="unitCost">Unit Purchase Price</label>
-            <input type="number" id="unitCost" value="10" step="0.01" min="0" required>
-          </div>
-          <div class="form-group">
-            <label for="shippingCost">Total Shipping & Freight Cost</label>
-            <input type="number" id="shippingCost" value="150" step="0.01" min="0">
-          </div>
-          <div class="form-group">
-            <label for="insuranceCost">Insurance & Port / Handling Fees</label>
-            <input type="number" id="insuranceCost" value="25" step="0.01" min="0">
-          </div>
-        </div>
-
-        <h3>2. Import Duties & Taxes (Manual Entry)</h3>
-        <div class="grid">
-          <div class="form-group">
-            <label for="dutyRate">Customs Duty Rate (%)</label>
-            <input type="number" id="dutyRate" value="5" step="0.1" min="0">
-          </div>
-          <div class="form-group">
-            <label for="vatRate">Import VAT / GST Rate (%)</label>
-            <input type="number" id="vatRate" value="10" step="0.1" min="0">
-          </div>
-        </div>
-
-        <div class="government-links">
-          <p style="font-weight: 600; font-size: 0.85rem; color: #2d3748; margin-bottom: 5px;">
-            🔍 Don't know your rate? Look up your official HS code percentage:
-          </p>
-          <ul>
-            <li><b>USA:</b> <a href="https://hts.usitc.gov/" target="_blank" rel="noopener">USITC HTS Schedule</a></li>
-            <li><b>UK:</b> <a href="https://www.gov.uk/trade-tariff" target="_blank" rel="noopener">GOV.UK Trade Tariff</a></li>
-            <li><b>EU:</b> <a href="https://ec.europa.eu/taxation_customs/dds2/taric/taric_consultation.jsf" target="_blank" rel="noopener">EU TARIC Consultation</a></li>
-            <li><b>Australia:</b> <a href="https://www.abf.gov.au/importing-exporting-and-stripport/ics" target="_blank" rel="noopener">ABF Customs Tariff</a></li>
-            <li><b>India:</b> <a href="https://www.icegate.gov.in/Webappl/Trade-Guide-on-Imports" target="_blank" rel="noopener">ICEGATE Trade Guide (CBIC)</a></li>
-          </ul>
-        </div>
-
-        <h3>3. Revenue & Profit Margin</h3>
-        <div class="grid">
-          <div class="form-group">
-            <label for="sellingPrice">Target Selling Price per Unit</label>
-            <input type="number" id="sellingPrice" value="35" step="0.01" min="0">
-          </div>
-        </div>
-
-        <button type="button" onclick="calculateLandedCost()">Calculate Landed Cost</button>
-      </form>
-
-      <div id="results" class="results-box" style="display:none;">
-        <h2>Calculation Summary</h2>
-        <div class="results-grid">
-          <div class="result-item">
-            <span>Total Product Cost:</span>
-            <strong id="res-productCost">0.00</strong>
-          </div>
-          <div class="result-item">
-            <span>Customs Duty Amount:</span>
-            <strong id="res-duty">0.00</strong>
-          </div>
-          <div class="result-item">
-            <span>Import VAT / GST:</span>
-            <strong id="res-vat">0.00</strong>
-          </div>
-          <div class="result-item highlight">
-            <span>Total Landed Cost:</span>
-            <strong id="res-landedTotal">0.00</strong>
-          </div>
-          <div class="result-item highlight">
-            <span>Landed Cost per Unit:</span>
-            <strong id="res-unitLanded">0.00</strong>
-          </div>
-          <div class="result-item profit">
-            <span>Estimated Total Profit:</span>
-            <strong id="res-profit">0.00</strong>
-          </div>
-          <div class="result-item profit">
-            <span>Profit Margin:</span>
-            <strong id="res-margin">0.00%</strong>
-          </div>
-        </div>
-
-        <div id="affiliate-box" class="affiliate-card" style="margin-top: 20px;"></div>
+  <!-- 3. Interactive Calculator Section -->
+  <main id="calculator" class="calculator-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Landed Cost & Duty Calculator</h2>
+        <p>Enter your product, freight, and tariff details below to see full cost breakdowns.</p>
       </div>
 
-      <p class="disclaimer">
-        <b>Disclaimer:</b> Calculations are based on user-entered manual figures for planning purposes. Always verify official tariff codes and valuation guidelines with a licensed customs broker before finalizing shipments.
-      </p>
+      <div class="calc-card">
+        <div class="calc-grid">
+          <div class="calc-inputs">
+            <div class="form-group">
+              <label for="units">Total Quantity (Units)</label>
+              <input type="number" id="units" value="1000" oninput="calculateLandedCost()">
+            </div>
+            <div class="form-group">
+              <label for="unit-cost">Unit Factory Price ($)</label>
+              <input type="number" id="unit-cost" value="5.00" step="0.01" oninput="calculateLandedCost()">
+            </div>
+            <div class="form-group">
+              <label for="freight">Total Freight & Insurance ($)</label>
+              <input type="number" id="freight" value="800" oninput="calculateLandedCost()">
+            </div>
+            <div class="form-group">
+              <label for="duty-rate">Customs Duty Rate (%)</label>
+              <input type="number" id="duty-rate" value="5.0" step="0.1" oninput="calculateLandedCost()">
+            </div>
+          </div>
+
+          <div class="summary-box">
+            <h3>Calculation Summary</h3>
+            <div class="summary-row">
+              <span>Total Product Cost:</span>
+              <strong id="out-product">$5,000.00</strong>
+            </div>
+            <div class="summary-row">
+              <span>Customs Duty Amount:</span>
+              <strong id="out-duty">$250.00</strong>
+            </div>
+            <div class="summary-row">
+              <span>Total Freight Fee:</span>
+              <strong id="out-freight">$800.00</strong>
+            </div>
+            <div class="summary-row total">
+              <span>Total Landed Cost:</span>
+              <strong id="out-landed">$6,050.00</strong>
+            </div>
+            <div class="summary-row total">
+              <span>Landed Cost per Unit:</span>
+              <strong id="out-unit-landed">$6.05</strong>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
-  <footer>
+  <!-- 4. Feature Trust Cards -->
+  <section class="features-section">
     <div class="container">
-      <p>&copy; 2026 Global Import Calc. Built for international ecommerce sellers and traders.</p>
-      <p style="margin-top: 8px;">
-        <a href="index.html" style="color: #718096; margin-right: 15px;">Calculator</a>
-        <a href="privacy.html" style="color: #718096; margin-right: 15px;">Privacy Policy</a>
-        <a href="terms.html" style="color: #718096;">Terms of Service</a>
-      </p>
+      <div class="section-title">
+        <h2>Why Importers Trust Global Import Calc</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3>Complete Landed Costs</h3>
+          <p>Factor in factory unit price, ocean or air freight, and duty rates before placing factory orders.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛃</div>
+          <h3>Customs & Tax Clarity</h3>
+          <p>Avoid surprise clearance fees at port entry by pre-calculating accurate duty percentages.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Profit Margin Defense</h3>
+          <p>Ensure your retail or Amazon listing price delivers strong ROI after accounting for hidden fees.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Educational Articles Section -->
+  <section id="articles" class="section-block">
+    <div class="container">
+      <div class="section-title">
+        <h2>Import & Customs Guides</h2>
+        <p>Essential educational guides for global traders and ecommerce merchants.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Incoterms 2026: FOB vs. DDP Explained</h3>
+          <p>Learn who pays for freight, insurance, and duties under standard trade terms.</p>
+        </div>
+        <div class="feature-card">
+          <h3>How to Lookup Harmonized Tariff (HS) Codes</h3>
+          <p>A simple guide to searching official customs tariff books for your product code.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Import VAT & Sales Tax Calculation Guide</h3>
+          <p>How local tax authorities calculate VAT and GST on imported cargo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Blog Section -->
+  <section id="blog" class="section-block" style="background: var(--bg-light);">
+    <div class="container">
+      <div class="section-title">
+        <h2>Latest Industry Blog Posts</h2>
+        <p>Logistics news, container freight trends, and regulatory updates.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="blog-category">Logistics</span>
+          <h3>Navigating Peak Season Ocean Freight Rates</h3>
+          <p>Practical strategies for ecommerce importers to cushion margins during rate spikes.</p>
+        </div>
+        <div class="feature-card">
+          <span class="blog-category">Compliance</span>
+          <h3>5 Hidden Fees in Ocean Shipping</h3>
+          <p>Demurrage, detention, and port chassis fees explained.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Affiliate Program Section -->
+  <section id="affiliate" class="section-block">
+    <div class="container">
+      <div class="section-title">
+        <h2>Affiliate & Partner Program</h2>
+        <p>Earn commissions by recommending our calculation tools to your network.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>1. Sign Up Free</h3>
+          <p>Get instant access to referral links and promotional website banners.</p>
+        </div>
+        <div class="feature-card">
+          <h3>2. Refer Importers</h3>
+          <p>Share with Amazon FBA sellers, logistics clients, or software readers.</p>
+        </div>
+        <div class="feature-card">
+          <h3>3. Earn Recurring Revenue</h3>
+          <p>Receive payouts for users who join through your affiliate link.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Newsletter Signup Section (Netlify Form Enabled) -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-card">
+        <div class="newsletter-content">
+          <span class="newsletter-badge">📩 Daily Import & Logistics Brief</span>
+          <h2>Never Miss a Duty or Tariff Update</h2>
+          <p>Get daily ocean freight rate updates, compliance guides, and profit tips delivered to your inbox.</p>
+        </div>
+
+        <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="newsletter" />
+          <p class="hidden-field"><label>Spam check: <input name="bot-field" /></label></p>
+
+          <div class="input-group">
+            <input type="email" name="email" placeholder="Enter your email..." required>
+            <button type="submit" class="btn-subscribe">Subscribe Free</button>
+          </div>
+          <span class="privacy-note">🔒 No spam. Unsubscribe anytime.</span>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div>
+        <a href="/" class="footer-logo">🌐 Global Import Calc</a>
+        <p>Empowering ecommerce merchants, freight forwarders, and trade consultants worldwide.</p>
+        <p class="copyright">© 2026 Global Import Calc. All rights reserved.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#calculator">Calculator</a></li>
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="#blog">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Partners & Legal</h4>
+        <ul>
+          <li><a href="#affiliate">Affiliate Program</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+        </ul>
+      </div>
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <!-- Live Calculator Logic -->
+  <script>
+    function calculateLandedCost() {
+      const units = parseFloat(document.getElementById('units').value) || 0;
+      const unitCost = parseFloat(document.getElementById('unit-cost').value) || 0;
+      const freight = parseFloat(document.getElementById('freight').value) || 0;
+      const dutyRate = parseFloat(document.getElementById('duty-rate').value) || 0;
+
+      const totalProductCost = units * unitCost;
+      const totalDuty = totalProductCost * (dutyRate / 100);
+      const totalLandedCost = totalProductCost + totalDuty + freight;
+      const landedPerUnit = units > 0 ? (totalLandedCost / units) : 0;
+
+      document.getElementById('out-product').textContent = '$' + totalProductCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('out-duty').textContent = '$' + totalDuty.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('out-freight').textContent = '$' + freight.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('out-landed').textContent = '$' + totalLandedCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('out-unit-landed').textContent = '$' + landedPerUnit.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+
+    // Netlify Identity Redirection for Blog Admin
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
   </html>
   
