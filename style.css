@@ -1038,4 +1038,79 @@ select:focus-visible {
   align-items: center;
   justify-content: center;
   width: 38px;
-  height: 38px
+  height: 38px/
+ * MOBILE LAYOUT FIX */
+@media screen and (max-width: 768px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 8vw, 42px);
+    line-height: 1.2;
+    overflow-wrap: break-word;
+  }
+
+  .hero p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .calculator,
+  .calculator-card,
+  .feature-card,
+  .article-card,
+  .blog-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .calculator-grid,
+  .features-grid,
+  .articles-grid,
+  .blog-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  input,
+  select,
+  button,
+  textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .main-nav {
+    max-width: 100%;
+  }
+
+  footer {
+    overflow-wrap: break-word;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero {
+    padding: 48px 0;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  button,
+  .btn {
+    min-height: 44px;
+  }
+}
