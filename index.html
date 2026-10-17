@@ -3,291 +3,573 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Global Import Calc | Free Landed Cost & Customs Duty Calculator</title>
-  <meta name="description" content="Calculate international landed costs, customs duties, import VAT/GST, and net profit margins instantly.">
-  <link rel="stylesheet" href="style.css">
-  <link rel="alternate" type="application/rss+xml" title="Global Import Calc Blog RSS Feed" href="/feed.xml" />
-  <!-- Netlify Identity Widget for Blog Portal Login -->
+
+  <title>Global Import Calc | Free Landed Cost Calculator</title>
+
+  <meta name="description"
+        content="Estimate import landed costs, customs duty, import taxes, total cost per unit and potential profit with our free import calculator.">
+
+  <meta name="robots" content="index, follow">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Global Import Calc RSS" href="/feed.xml">
+
+  <script>
+    window.CMS_MANUAL_INIT = true;
+  </script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
+
 <body>
 
-  <!-- 1. Top Navigation Bar -->
-  <header class="site-header">
-    <div class="nav-container">
-      <a href="/" class="brand-logo">
-        <span class="logo-icon">🌐</span> Global Import Calc
-      </a>
+<header class="site-header">
+  <nav class="navbar">
+    <a class="logo" href="/">Global Import Calc</a>
 
-      <input type="checkbox" id="nav-toggle" class="nav-toggle">
-      <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </label>
-
-      <nav class="main-nav">
-        <ul class="nav-list">
-          <li><a href="/" class="nav-link active">Home</a></li>
-          <li><a href="#calculator" class="nav-link">Calculator</a></li>
-          <li><a href="#articles" class="nav-link">Articles</a></li>
-          <li><a href="#blog" class="nav-link">Blog</a></li>
-          <li><a href="#affiliate" class="nav-link highlight-btn">Affiliate Program</a></li>
-        </ul>
-      </nav>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#guides">Import Guides</a>
+      <a href="#official-resources">Official Resources</a>
+      <a href="/admin/">Admin</a>
     </div>
-  </header>
+  </nav>
+</header>
 
-  <!-- 2. Hero Banner Section -->
-  <section class="hero-section">
-    <div class="container">
-      <div class="hero-badge">⚡ Global Import Cost & Margin Calculator</div>
-      <h1>Master Your Import Margins Before You Ship</h1>
-      <p class="hero-subheading">
-        Accurately estimate landed costs, customs duties, import taxes, and net profitability across major global trade routes in seconds.
+<main>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="eyebrow">Free Import Cost Estimator</span>
+
+      <h1>Calculate Your Import Costs Before You Buy</h1>
+
+      <p>
+        Estimate landed costs, customs duty, import taxes and potential
+        profit using your own figures.
       </p>
-      <div class="hero-cta-group">
-        <a href="#calculator" class="btn btn-primary">Start Calculating Free</a>
-        <a href="#affiliate" class="btn btn-secondary">Join Partner Program</a>
-      </div>
+
+      <a class="btn" href="#calculator">Calculate Import Costs</a>
+
+      <p class="small-note">
+        Manual-entry calculator. No automatic customs-rate lookup or
+        currency conversion is provided.
+      </p>
     </div>
   </section>
 
-  <!-- 3. Interactive Calculator Section -->
-  <main id="calculator" class="calculator-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Landed Cost & Duty Calculator</h2>
-        <p>Enter your product, freight, and tariff details below to see full cost breakdowns.</p>
+  <section class="calculator-section" id="calculator">
+    <div class="section-heading">
+      <h2>Import Landed Cost Calculator</h2>
+      <p>Enter your product, shipping and tax details below.</p>
+    </div>
+
+    <form id="importForm" class="calculator-card">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="country">Importing Country</label>
+          <select id="country">
+            <option value="">Select country</option>
+            <option>Australia</option>
+            <option>Canada</option>
+            <option>India</option>
+            <option>United Kingdom</option>
+            <option>United States</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="currency">Display Currency</label>
+          <select id="currency">
+            <option value="USD">USD ($)</option>
+            <option value="AUD">AUD ($)</option>
+            <option value="INR">INR (₹)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="CAD">CAD ($)</option>
+            <option value="EUR">EUR (€)</option>
+          </select>
+          <small>Changes the display format only; it does not convert currencies.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input id="productName" type="text" placeholder="e.g. Solar panels">
+        </div>
+
+        <div class="form-group">
+          <label for="hsCode">HS Code (Optional)</label>
+          <input id="hsCode" type="text" placeholder="Enter product HS code">
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input id="quantity" type="number" min="0.000001" step="any" value="100" required>
+        </div>
+
+        <div class="form-group">
+          <label for="unitPrice">Price Per Unit</label>
+          <input id="unitPrice" type="number" min="0" step="any" value="10" required>
+        </div>
+
+        <div class="form-group">
+          <label for="freight">Total Freight / Shipping</label>
+          <input id="freight" type="number" min="0" step="any" value="500" required>
+        </div>
+
+        <div class="form-group">
+          <label for="insurance">Total Insurance</label>
+          <input id="insurance" type="number" min="0" step="any" value="50" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dutyRate">Customs Duty Rate (%)</label>
+          <input id="dutyRate" type="number" min="0" max="100" step="any" value="5" required>
+        </div>
+
+        <div class="form-group">
+          <label for="taxRate">Import Tax / VAT / GST (%)</label>
+          <input id="taxRate" type="number" min="0" max="100" step="any" value="10" required>
+        </div>
+
+        <div class="form-group">
+          <label for="otherCosts">Other Import Expenses</label>
+          <input id="otherCosts" type="number" min="0" step="any" value="100" required>
+          <small>For example, handling, brokerage or port charges.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="sellingPrice">Expected Selling Price Per Unit</label>
+          <input id="sellingPrice" type="number" min="0" step="any" value="20" required>
+        </div>
+
       </div>
 
-      <div class="calc-card">
-        <div class="calc-grid">
-          <div class="calc-inputs">
-            <div class="form-group">
-              <label for="units">Total Quantity (Units)</label>
-              <input type="number" id="units" value="1000" oninput="calculateLandedCost()">
-            </div>
-            <div class="form-group">
-              <label for="unit-cost">Unit Factory Price ($)</label>
-              <input type="number" id="unit-cost" value="5.00" step="0.01" oninput="calculateLandedCost()">
-            </div>
-            <div class="form-group">
-              <label for="freight">Total Freight & Insurance ($)</label>
-              <input type="number" id="freight" value="800" oninput="calculateLandedCost()">
-            </div>
-            <div class="form-group">
-              <label for="duty-rate">Customs Duty Rate (%)</label>
-              <input type="number" id="duty-rate" value="5.0" step="0.1" oninput="calculateLandedCost()">
-            </div>
+      <button type="submit" class="btn calculate-btn">Calculate My Costs</button>
+      <button type="reset" class="btn btn-secondary">Reset</button>
+
+      <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+
+      <div id="results" class="results" aria-live="polite" hidden>
+        <h3>Your Estimated Import Results</h3>
+
+        <div class="result-grid">
+          <div class="result-item">
+            <span>Product Cost</span>
+            <strong id="productCostResult">—</strong>
           </div>
 
-          <div class="summary-box">
-            <h3>Calculation Summary</h3>
-            <div class="summary-row">
-              <span>Total Product Cost:</span>
-              <strong id="out-product">$5,000.00</strong>
-            </div>
-            <div class="summary-row">
-              <span>Customs Duty Amount:</span>
-              <strong id="out-duty">$250.00</strong>
-            </div>
-            <div class="summary-row">
-              <span>Total Freight Fee:</span>
-              <strong id="out-freight">$800.00</strong>
-            </div>
-            <div class="summary-row total">
-              <span>Total Landed Cost:</span>
-              <strong id="out-landed">$6,050.00</strong>
-            </div>
-            <div class="summary-row total">
-              <span>Landed Cost per Unit:</span>
-              <strong id="out-unit-landed">$6.05</strong>
-            </div>
+          <div class="result-item">
+            <span>Freight</span>
+            <strong id="freightResult">—</strong>
+          </div>
+
+          <div class="result-item">
+            <span>Insurance</span>
+            <strong id="insuranceResult">—</strong>
+          </div>
+
+          <div class="result-item">
+            <span>Estimated Customs Duty</span>
+            <strong id="dutyResult">—</strong>
+          </div>
+
+          <div class="result-item">
+            <span>Estimated Import Tax</span>
+            <strong id="taxResult">—</strong>
+          </div>
+
+          <div class="result-item">
+            <span>Other Expenses</span>
+            <strong id="otherCostsResult">—</strong>
+          </div>
+
+          <div class="result-item highlight">
+            <span>Total Estimated Landed Cost</span>
+            <strong id="landedCostResult">—</strong>
+          </div>
+
+          <div class="result-item highlight">
+            <span>Landed Cost Per Unit</span>
+            <strong id="unitCostResult">—</strong>
+          </div>
+
+          <div class="result-item">
+            <span>Expected Sales Revenue</span>
+            <strong id="revenueResult">—</strong>
+          </div>
+
+          <div class="result-item">
+            <span>Estimated Profit / Loss</span>
+            <strong id="profitResult">—</strong>
+          </div>
+
+          <div class="result-item">
+            <span>Estimated Profit Margin</span>
+            <strong id="marginResult">—</strong>
           </div>
         </div>
-      </div>
-    </div>
-  </main>
 
-  <!-- 4. Feature Trust Cards -->
-  <section class="features-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Why Importers Trust Global Import Calc</h2>
+        <button type="button" id="downloadCsv" class="btn">
+          Download Results as CSV
+        </button>
+
+        <p class="small-note">
+          Profit is estimated before any expenses not entered into this
+          calculator, such as marketing, storage, financing or selling costs.
+        </p>
       </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📦</div>
-          <h3>Complete Landed Costs</h3>
-          <p>Factor in factory unit price, ocean or air freight, and duty rates before placing factory orders.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🛃</div>
-          <h3>Customs & Tax Clarity</h3>
-          <p>Avoid surprise clearance fees at port entry by pre-calculating accurate duty percentages.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📈</div>
-          <h3>Profit Margin Defense</h3>
-          <p>Ensure your retail or Amazon listing price delivers strong ROI after accounting for hidden fees.</p>
-        </div>
-      </div>
+    </form>
+  </section>
+
+  <section class="info-section" id="guides">
+    <div class="section-heading">
+      <h2>How to Calculate Import Costs</h2>
+      <p>Understand the main costs before placing an international order.</p>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <h3>1. Product Cost</h3>
+        <p>Multiply the quantity you are buying by the price per unit.</p>
+      </article>
+
+      <article class="feature-card">
+        <h3>2. Shipping and Insurance</h3>
+        <p>Add the freight and insurance charges applicable to your shipment.</p>
+      </article>
+
+      <article class="feature-card">
+        <h3>3. Customs Duty and Tax</h3>
+        <p>Enter the rates you have verified for your product and destination.</p>
+      </article>
+
+      <article class="feature-card">
+        <h3>4. Total Landed Cost</h3>
+        <p>Add the estimated import costs to understand your overall expense.</p>
+      </article>
+
+      <article class="feature-card">
+        <h3>5. Cost Per Unit</h3>
+        <p>Divide the estimated total landed cost by the quantity imported.</p>
+      </article>
+
+      <article class="feature-card">
+        <h3>6. Potential Profit</h3>
+        <p>Compare your expected sales revenue with your estimated landed cost.</p>
+      </article>
     </div>
   </section>
 
-  <!-- 5. Educational Articles Section -->
-  <section id="articles" class="section-block">
-    <div class="container">
-      <div class="section-title">
-        <h2>Import & Customs Guides</h2>
-        <p>Essential educational guides for global traders and ecommerce merchants.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <h3>Incoterms 2026: FOB vs. DDP Explained</h3>
-          <p>Learn who pays for freight, insurance, and duties under standard trade terms.</p>
-        </div>
-        <div class="feature-card">
-          <h3>How to Lookup Harmonized Tariff (HS) Codes</h3>
-          <p>A simple guide to searching official customs tariff books for your product code.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Import VAT & Sales Tax Calculation Guide</h3>
-          <p>How local tax authorities calculate VAT and GST on imported cargo.</p>
-        </div>
-      </div>
+  <section class="info-section" id="official-resources">
+    <div class="section-heading">
+      <h2>Official Customs Resources</h2>
+      <p>
+        Use these government resources to research tariffs and import
+        requirements. Verify that each source applies to your product and shipment.
+      </p>
     </div>
+
+    <div class="resource-list">
+      <a href="https://www.abf.gov.au/importing-exporting-and-manufacturing/importing/how-to-import"
+         target="_blank" rel="noopener noreferrer">Australia — Australian Border Force</a>
+
+      <a href="https://www.cbsa-asfc.gc.ca/trade-commerce/tariff-tarif/menu-eng.html"
+         target="_blank" rel="noopener noreferrer">Canada — Customs Tariff</a>
+
+      <a href="https://taxation-customs.ec.europa.eu/customs-4/calculation-customs-duties/customs-tariff/eu-customs-tariff-taric_en"
+         target="_blank" rel="noopener noreferrer">European Union — TARIC</a>
+
+      <a href="https://www.icegate.gov.in/"
+         target="_blank" rel="noopener noreferrer">India — ICEGATE</a>
+
+      <a href="https://www.gov.uk/trade-tariff"
+         target="_blank" rel="noopener noreferrer">United Kingdom — Trade Tariff</a>
+
+      <a href="https://hts.usitc.gov/"
+         target="_blank" rel="noopener noreferrer">United States — Harmonized Tariff Schedule</a>
+    </div>
+
+    <p class="small-note">
+      These are external reference links. Global Import Calc is not affiliated
+      with these authorities and does not guarantee the completeness or accuracy
+      of external information.
+    </p>
   </section>
 
-  <!-- 6. Blog Section -->
-  <section id="blog" class="section-block" style="background: var(--bg-light);">
-    <div class="container">
-      <div class="section-title">
-        <h2>Latest Industry Blog Posts</h2>
-        <p>Logistics news, container freight trends, and regulatory updates.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <span class="blog-category">Logistics</span>
-          <h3>Navigating Peak Season Ocean Freight Rates</h3>
-          <p>Practical strategies for ecommerce importers to cushion margins during rate spikes.</p>
-        </div>
-        <div class="feature-card">
-          <span class="blog-category">Compliance</span>
-          <h3>5 Hidden Fees in Ocean Shipping</h3>
-          <p>Demurrage, detention, and port chassis fees explained.</p>
-        </div>
-      </div>
-    </div>
+  <section class="disclaimer-section">
+    <h2>Important Disclaimer</h2>
+
+    <p>
+      Global Import Calc is an estimation tool provided for informational
+      purposes only. All figures, including product prices, customs duty rates,
+      import taxes, freight, insurance and other expenses, are entered by the
+      user. Calculations are based on the information supplied by the user and
+      the formulas described on this website.
+    </p>
+
+    <p>
+      Results are estimates and may not reflect the actual costs payable.
+      Customs duties, taxes, fees and import requirements vary by country,
+      product classification, country of origin and applicable regulations.
+      Actual customs valuation and tax calculations may use different rules
+      from those assumed by this calculator.
+    </p>
+
+    <p>
+      Users are responsible for verifying applicable rates and requirements
+      with the relevant authorities and qualified professionals before making
+      import or purchasing decisions. Global Import Calc does not provide
+      customs brokerage, tax, legal or financial advice and does not guarantee
+      the accuracy or completeness of any result. To the extent permitted by
+      applicable law, Global Import Calc disclaims liability for losses arising
+      from reliance on the estimates provided by this tool.
+    </p>
   </section>
 
-  <!-- 7. Affiliate Program Section -->
-  <section id="affiliate" class="section-block">
-    <div class="container">
-      <div class="section-title">
-        <h2>Affiliate & Partner Program</h2>
-        <p>Earn commissions by recommending our calculation tools to your network.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <h3>1. Sign Up Free</h3>
-          <p>Get instant access to referral links and promotional website banners.</p>
-        </div>
-        <div class="feature-card">
-          <h3>2. Refer Importers</h3>
-          <p>Share with Amazon FBA sellers, logistics clients, or software readers.</p>
-        </div>
-        <div class="feature-card">
-          <h3>3. Earn Recurring Revenue</h3>
-          <p>Receive payouts for users who join through your affiliate link.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. Newsletter Signup Section (Netlify Form Enabled) -->
   <section class="newsletter-section">
-    <div class="container">
-      <div class="newsletter-card">
-        <div class="newsletter-content">
-          <span class="newsletter-badge">📩 Daily Import & Logistics Brief</span>
-          <h2>Never Miss a Duty or Tariff Update</h2>
-          <p>Get daily ocean freight rate updates, compliance guides, and profit tips delivered to your inbox.</p>
-        </div>
+    <h2>Get Import Tips and Updates</h2>
+    <p>Join our newsletter for useful import-cost tips and guides.</p>
 
-        <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="newsletter" />
-          <p class="hidden-field"><label>Spam check: <input name="bot-field" /></label></p>
+    <form name="newsletter"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field">
 
-          <div class="input-group">
-            <input type="email" name="email" placeholder="Enter your email..." required>
-            <button type="submit" class="btn-subscribe">Subscribe Free</button>
-          </div>
-          <span class="privacy-note">🔒 No spam. Unsubscribe anytime.</span>
-        </form>
-      </div>
-    </div>
+      <input type="hidden" name="form-name" value="newsletter">
+
+      <p hidden>
+        <label>Do not fill this out:
+          <input name="bot-field">
+        </label>
+      </p>
+
+      <label class="visually-hidden" for="newsletterEmail">Email address</label>
+      <input id="newsletterEmail"
+             type="email"
+             name="email"
+             placeholder="Enter your email address"
+             required>
+
+      <button class="btn" type="submit">Subscribe</button>
+    </form>
   </section>
 
-  <!-- 9. Footer -->
-  <footer class="site-footer">
-    <div class="container footer-container">
-      <div>
-        <a href="/" class="footer-logo">🌐 Global Import Calc</a>
-        <p>Empowering ecommerce merchants, freight forwarders, and trade consultants worldwide.</p>
-        <p class="copyright">© 2026 Global Import Calc. All rights reserved.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="#calculator">Calculator</a></li>
-          <li><a href="#articles">Articles</a></li>
-          <li><a href="#blog">Blog</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Partners & Legal</h4>
-        <ul>
-          <li><a href="#affiliate">Affiliate Program</a></li>
-          <li><a href="/privacy">Privacy Policy</a></li>
-          <li><a href="/terms">Terms of Service</a></li>
-          <li><a href="/admin/" style="opacity: 0.6; font-size: 0.85rem;">Admin Login</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+</main>
 
-  <!-- Live Calculator Logic -->
-  <script>
-    function calculateLandedCost() {
-      const units = parseFloat(document.getElementById('units').value) || 0;
-      const unitCost = parseFloat(document.getElementById('unit-cost').value) || 0;
-      const freight = parseFloat(document.getElementById('freight').value) || 0;
-      const dutyRate = parseFloat(document.getElementById('duty-rate').value) || 0;
+<footer class="site-footer">
+  <p>&copy; <span id="currentYear"></span> Global Import Calc. All rights reserved.</p>
 
-      const totalProductCost = units * unitCost;
-      const totalDuty = totalProductCost * (dutyRate / 100);
-      const totalLandedCost = totalProductCost + totalDuty + freight;
-      const landedPerUnit = units > 0 ? (totalLandedCost / units) : 0;
+  <div class="footer-links">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Use</a>
+    <a href="/admin/">Admin</a>
+  </div>
 
-      document.getElementById('out-product').textContent = '$' + totalProductCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      document.getElementById('out-duty').textContent = '$' + totalDuty.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      document.getElementById('out-freight').textContent = '$' + freight.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      document.getElementById('out-landed').textContent = '$' + totalLandedCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-      document.getElementById('out-unit-landed').textContent = '$' + landedPerUnit.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  <p class="small-note">
+    Global Import Calc is an independent estimation tool.
+  </p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const form = document.getElementById("importForm");
+  const results = document.getElementById("results");
+  const message = document.getElementById("formMessage");
+  const currencySelect = document.getElementById("currency");
+
+  let latestCalculation = null;
+
+  document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
+
+  function getNumber(id) {
+    return Number(document.getElementById(id).value);
+  }
+
+  function formatMoney(amount) {
+    const currency = currencySelect.value;
+
+    try {
+      return new Intl.NumberFormat("en", {
+        style: "currency",
+        currency: currency,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(amount);
+    } catch (error) {
+      return currency + " " + amount.toFixed(2);
+    }
+  }
+
+  function setResult(id, value) {
+    document.getElementById(id).textContent = value;
+  }
+
+  function calculate() {
+    const quantity = getNumber("quantity");
+    const unitPrice = getNumber("unitPrice");
+    const freight = getNumber("freight");
+    const insurance = getNumber("insurance");
+    const dutyRate = getNumber("dutyRate");
+    const taxRate = getNumber("taxRate");
+    const otherCosts = getNumber("otherCosts");
+    const sellingPrice = getNumber("sellingPrice");
+
+    const numbers = [
+      quantity, unitPrice, freight, insurance,
+      dutyRate, taxRate, otherCosts, sellingPrice
+    ];
+
+    if (!numbers.every(Number.isFinite) ||
+        numbers.some(number => number < 0) ||
+        quantity <= 0 ||
+        dutyRate > 100 ||
+        taxRate > 100) {
+      message.textContent =
+        "Please enter valid non-negative figures. Quantity must be greater than zero, and tax and duty rates cannot exceed 100%.";
+      results.hidden = true;
+      latestCalculation = null;
+      return;
     }
 
-    // Netlify Identity Redirection for Blog Admin
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
+    const productCost = quantity * unitPrice;
+
+    // Simplified estimates only. Actual customs valuation rules vary.
+    const customsValue = productCost + freight + insurance;
+    const duty = customsValue * dutyRate / 100;
+    const importTax = (customsValue + duty) * taxRate / 100;
+
+    const landedCost =
+      productCost + freight + insurance + duty + importTax + otherCosts;
+
+    const costPerUnit = landedCost / quantity;
+    const revenue = quantity * sellingPrice;
+    const profit = revenue - landedCost;
+    const margin = revenue > 0 ? (profit / revenue) * 100 : null;
+
+    latestCalculation = {
+      country: document.getElementById("country").value || "Not specified",
+      currency: currencySelect.value,
+      productName: document.getElementById("productName").value || "Not specified",
+      hsCode: document.getElementById("hsCode").value || "Not specified",
+      quantity,
+      unitPrice,
+      productCost,
+      freight,
+      insurance,
+      dutyRate,
+      duty,
+      taxRate,
+      importTax,
+      otherCosts,
+      landedCost,
+      costPerUnit,
+      sellingPrice,
+      revenue,
+      profit,
+      margin
+    };
+
+    setResult("productCostResult", formatMoney(productCost));
+    setResult("freightResult", formatMoney(freight));
+    setResult("insuranceResult", formatMoney(insurance));
+    setResult("dutyResult", formatMoney(duty));
+    setResult("taxResult", formatMoney(importTax));
+    setResult("otherCostsResult", formatMoney(otherCosts));
+    setResult("landedCostResult", formatMoney(landedCost));
+    setResult("unitCostResult", formatMoney(costPerUnit));
+    setResult("revenueResult", formatMoney(revenue));
+    setResult("profitResult", formatMoney(profit));
+    setResult("marginResult", margin === null ? "N/A" : margin.toFixed(2) + "%");
+
+    results.hidden = false;
+    message.textContent = "Your estimate has been calculated.";
+  }
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    calculate();
+  });
+
+  currencySelect.addEventListener("change", function () {
+    if (latestCalculation) {
+      calculate();
     }
-  </script>
+  });
+
+  form.addEventListener("reset", function () {
+    window.setTimeout(function () {
+      results.hidden = true;
+      message.textContent = "";
+      latestCalculation = null;
+    }, 0);
+  });
+
+  document.getElementById("downloadCsv").addEventListener("click", function () {
+    if (!latestCalculation) {
+      message.textContent = "Calculate your import costs before downloading.";
+      return;
+    }
+
+    const data = latestCalculation;
+
+    const rows = [
+      ["Field", "Value"],
+      ["Importing country", data.country],
+      ["Display currency", data.currency],
+      ["Product name", data.productName],
+      ["HS code", data.hsCode],
+      ["Quantity", data.quantity],
+      ["Price per unit", data.unitPrice],
+      ["Product cost", data.productCost],
+      ["Freight", data.freight],
+      ["Insurance", data.insurance],
+      ["Customs duty rate (%)", data.dutyRate],
+      ["Estimated customs duty", data.duty],
+      ["Import tax rate (%)", data.taxRate],
+      ["Estimated import tax", data.importTax],
+      ["Other expenses", data.otherCosts],
+      ["Total estimated landed cost", data.landedCost],
+      ["Landed cost per unit", data.costPerUnit],
+      ["Expected selling price per unit", data.sellingPrice],
+      ["Expected sales revenue", data.revenue],
+      ["Estimated profit/loss", data.profit],
+      ["Estimated profit margin (%)", data.margin === null ? "N/A" : data.margin.toFixed(2)],
+      ["Disclaimer", "Estimate only; verify actual duties, taxes and requirements."]
+    ];
+
+    function escapeCsv(value) {
+      let text = String(value);
+
+      // Prevent spreadsheet applications from interpreting user text as formulas.
+      if (/^[=+\-@\t\r]/.test(text)) {
+        text = "'" + text;
+      }
+
+      return '"' + text.replace(/"/g, '""') + '"';
+    }
+
+    const csv = rows.map(row => row.map(escapeCsv).join(",")).join("\r\n");
+    const blob = new Blob(["\uFEFF" + csv], {
+      type: "text/csv;charset=utf-8;"
+    });
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "global-import-calculation.csv";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  });
+})();
+</script>
+
 </body>
-                </html>
-  
+  </html>
